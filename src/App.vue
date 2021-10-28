@@ -23,72 +23,66 @@
 </template>
 
 <script>
-/* TODO:  - Napraviti brzi loading low quality slika
-          - Zamjena za mormalne slike
-          - Provuci kroz cijeli projekt
-*/
-/* TODO: - Animacije modula i objekata kroz cijeli projekt
- */
 
-    export default {
-        name: 'App',
-        data () {
-          return {
-            webData: {},
-            loadingFirstHalf: 50,
-            loadingSecondHalf: 50,
-            loadingPage: true,
-            loadingHalf: 0,
-            loadingPercent: 0,
-            loadTime: 0,
-            interval: null
-          }
-        },
-        created () {
-          let perfData = window.performance.timing;
-          let estimatedTime = Math.abs(perfData.loadEventEnd - perfData.navigationStart);
-          this.loadTime = Number((estimatedTime / 1000) % 60) * 100;
-          this.doProgress();
-        },
-        beforeMount () {
-          this.$store.commit('toggleLang', 'eng');
-          this.webData = this.$store.getters.getWebData;
-        },
-        watch: {
-          loadingPercent (val) {
-            if (val < 50) {
-              this.loadingFirstHalf--;
-            } else if (val > 50 && val < 100) {
-              this.loadingSecondHalf--;
-            } else if (val >= 100) {
-              clearInterval(this.interval);
-              this.loadingPage = false;
-            }
-          }
-        },
-        methods: {
-          updateLang () {
-            this.webData = this.$store.getters.getWebData;
-            this.$forceUpdate();
-          },
-          doProgress () {
-            let step = this.loadTime / 100;
-            this.interval = setInterval(() => {
-              this.loadingPercent++;
-            }, step);
-          }
-        },
-        computed: {
-          loadedFirstHalf () {
-            let h = this.loadingFirstHalf * 2;
-            return h + '%'
-          },
-          loadedSecondHalf () {
-            let h = this.loadingSecondHalf * 2;
-            return h + '%'
-          }
-        }
+export default {
+  name: 'App',
+  data () {
+    return {
+      webData: {},
+      loadingFirstHalf: 50,
+      loadingSecondHalf: 50,
+      loadingPage: true,
+      loadingHalf: 0,
+      loadingPercent: 0,
+      loadTime: 0,
+      interval: null
     }
+  },
+  created () {
+    const perfData = window.performance.timing
+    const estimatedTime = Math.abs(perfData.loadEventEnd - perfData.navigationStart)
+    this.loadTime = Number((estimatedTime / 1000) % 60) * 100
+    this.doProgress()
+  },
+  beforeMount () {
+    this.$store.commit('toggleLang', 'eng')
+    this.webData = this.$store.getters.getWebData
+  },
+  watch: {
+    loadingPercent (val) {
+      if (val < 50) {
+        this.loadingFirstHalf--
+      } else if (val > 50 && val < 100) {
+        this.loadingSecondHalf--
+      } else if (val >= 100) {
+        clearInterval(this.interval)
+        this.loadingPage = false
+      }
+    }
+  },
+  methods: {
+    updateLang () {
+      this.webData = this.$store.getters.getWebData
+      this.$forceUpdate()
+    },
+    doProgress () {
+      const step = this.loadTime / 100
+      this.interval = setInterval(() => {
+        this.loadingPercent++
+      }, step)
+    }
+  },
+  computed: {
+    loadedFirstHalf () {
+      const h = this.loadingFirstHalf * 2
+      return h + '%'
+    },
+    loadedSecondHalf () {
+      const h = this.loadingSecondHalf * 2
+      return h + '%'
+    }
+  }
+}
 </script>
 
 <style>

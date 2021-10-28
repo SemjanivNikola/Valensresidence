@@ -327,9 +327,7 @@ export default {
       )
     },
     MouseWheelHandler (e) {
-      // console.log('e: ', e);
       // cross browser wheel delta
-      // e = window.event || e; //old IE support
       if (!this.$store.state.mobaDev) {
         e.preventDefault()
         if (!this.animationOnGoing) {

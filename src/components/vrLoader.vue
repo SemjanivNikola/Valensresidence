@@ -17,40 +17,40 @@
 
 <script>
 export default {
-  name: "vrLoader",
+  name: 'vrLoader',
   props: ['loadPercent'],
   data () {
     return {
       loadingHalf: 0,
       loadingPercent: 0,
       loadingFirstHalf: 50,
-      loadingSecondHalf: 50,
+      loadingSecondHalf: 50
     }
   },
   watch: {
     loadingPercent (val) {
       if (val < 50) {
-        this.loadingFirstHalf--;
+        this.loadingFirstHalf--
       } else if (val > 50 && val < 100) {
-        this.loadingSecondHalf--;
+        this.loadingSecondHalf--
       } else if (val >= 100) {
-        clearInterval(this.interval);
-        this.loadingPage = false;
+        clearInterval(this.interval)
+        this.loadingPage = false
       }
     }
   },
   methods: {
     setLoadingValue (value) {
-      this.loadingPercent = value;
+      this.loadingPercent = value
     }
   },
   computed: {
     loadedFirstHalf () {
-      let h = this.loadingFirstHalf * 2;
+      const h = this.loadingFirstHalf * 2
       return h + '%'
     },
     loadedSecondHalf () {
-      let h = this.loadingSecondHalf * 2;
+      const h = this.loadingSecondHalf * 2
       return h + '%'
     }
   }

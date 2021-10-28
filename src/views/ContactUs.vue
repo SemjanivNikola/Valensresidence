@@ -6,15 +6,7 @@
         <div
           class="position-relative w-100"
           style="
-            box-sizing: border-box;
-            background-image: linear-gradient(
-              to top,
-              white,
-              white,
-              transparent
-            );
-          "
-        >
+            box-sizing: border-box; background-image: linear-gradient(to top, white, white, transparent);">
           <div id="v-svg" class="svg-container">
             <svg viewBox="0 5 100 65">
               <path d="M0,0 L600,200 0,200 Z" fill="white"></path>
@@ -227,14 +219,14 @@
                             required
                           />
                           <b-form-select
-                            class="block select"
+                            class="block select select"
                             v-model="selectService"
                             :options="services"
                             style="width: 280px"
                           ></b-form-select>
                           <b-form-select
                             v-if="selectService !== null"
-                            class="block select trans-500-ms"
+                            class="block select trans-500-ms select"
                             v-model="inquiryForm.serviceDetails"
                             :options="serviceDetailsOptions"
                             :key="selectService"
@@ -446,6 +438,7 @@ export default {
           this.handleAxiosDataResponse(response)
         })
         .catch(() => {
+          console.log('Fetching reservations error: ', error)
           // this.backupApiReservations(id);
         })
       this.setUpCalendar()
@@ -457,7 +450,7 @@ export default {
           this.handleAxiosDataResponse(response)
         })
         .catch((error) => {
-          console.log('Error: ', error)
+          console.log('Fetching reservations error: ', error)
         })
     },
     handleAxiosDataResponse (r) {
@@ -968,7 +961,7 @@ textarea {
   padding-left: 3px;
 }
 input,
-.select {
+.inquiry-form .select {
   height: 40px;
   margin-bottom: 5px;
   border: 1px solid transparent;

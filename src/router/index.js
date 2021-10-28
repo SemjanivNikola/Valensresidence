@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Main from '../views/Main'
-import ContactUs from "../views/ContactUs";
-import Gallery from "../views/Gallery";
+import ContactUs from '../views/ContactUs'
+import Gallery from '../views/Gallery'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -36,12 +36,12 @@ const routes = [
     path: '*',
     redirect: '/'
   }
-];
+]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
 export default router
